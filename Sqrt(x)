@@ -1,0 +1,12 @@
+if(x==1 || x==0) return x;
+        long square;
+        int start=0;
+        int end=x;
+        while(start<=end){
+            int mid=start+(end-start)/2;
+            square=(long)mid*mid;
+            if(square==x) return mid;
+            else if(square>x) end=mid-1;
+            else start=mid+1;
+        }
+        return end;
