@@ -1,0 +1,12 @@
+if(n==1) return 1;
+        if(n==2) return 2;
+        int prestep=1;
+        int prestep2=2;
+        int currentstep=0;
+        for(int i=3;i<=n;i++){
+            currentstep=prestep+prestep2;
+            prestep=prestep2;
+            prestep2=currentstep;
+        }
+        return currentstep;
+      
