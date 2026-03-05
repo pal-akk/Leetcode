@@ -1,0 +1,36 @@
+int search(vector<int>& nums, int target) {
+        int n = nums.size();
+        int found=-1;
+        int stop=0;
+        for(int i=1 ;i<n ;i++){
+            if(nums[i]<nums[i-1]){
+                stop=i;
+                break;
+            }
+        
+        }
+        int left=0;
+        int right=stop;
+        while(left<=right){
+            int mid=(left +right)/2;
+            if(target == nums[mid]){
+                found= mid;
+                break;
+            }
+            else if(target > nums[mid]) left=mid+1;
+            else right=mid-1;
+        }
+        left=stop;
+        right=n-1;
+        while(left<=right){
+            int mid=(left + right)/2;
+            if(target== nums[mid]){
+                found=mid;
+                break;
+            }
+            else if(target > nums[mid]) left=mid+1;
+            else right=mid-1;
+        }
+        return found;
+        
+    }
