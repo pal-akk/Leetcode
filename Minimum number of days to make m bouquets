@@ -1,0 +1,37 @@
+bool canbemade(const vector<int> & bloomDay ,int m ,int k , int day){
+        // checks for each possible mid day value which satisfies the condition for bouquet
+        int bouq=0;
+        int flo=0;
+        for(int d: bloomDay){
+            if(d<=day){
+                flo++;
+                if(flo==k){
+                    bouq++; 
+                    flo=0;// as soon as one bouquet set completes flower count is 0
+                }
+            }
+            else flo=0; //even if condn is not satisfied no flower addded so 0
+            
+            
+        }
+        return bouq>=m; // check if bouquets are made 
+    }
+    int minDays(vector<int>& bloomDay, int m, int k) {
+        long long n= bloomDay.size();
+        long long p=(long long)k*m;
+        if(n<p ) return -1;
+        int left=*min_element(bloomDay.begin(),bloomDay.end());
+        int right=*max_element(bloomDay.begin(), bloomDay.end());
+        int result=-1;
+        while(left<=right){
+            int mid=(left+right)/2;
+            if(canbemade(bloomDay , m, k ,mid)){
+                result=mid;
+                right=mid-1; // keep searching smaller days
+            }
+            else left=mid+1; // search for larger days as more wait needed
+        }
+        return result; 
+        
+    }
+};
