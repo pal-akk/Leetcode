@@ -1,0 +1,24 @@
+int smallestDivisor(vector<int>& nums, int threshold) {
+        int n=nums.size();
+        int left=1; // the divisor exist between the smallest possible which is 1 nd th emax possible no need for it to be element of array only
+        int right=*max_element(nums.begin(), nums.end());
+        int d=right;
+        while(left<=right){
+            int mid=(left +right)/2;
+            int sum=0;
+            for(int i :nums){
+                sum+=(i+mid-1)/mid;
+            }
+            if(sum<= threshold){
+                d=mid;
+                right=mid-1; // we want to check for smallest possible one so after getting condition fulfilled we will move to smaller side
+            }
+            else if(sum > threshold){
+                left=mid+1;
+            }
+
+        }
+        return d;
+        
+    }
+};
