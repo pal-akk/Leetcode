@@ -1,0 +1,23 @@
+int shipWithinDays(vector<int>& weights, int days) {
+        int n= weights.size();
+        int left= *max_element(weights.begin(), weights.end());
+        int right =accumulate(weights.begin(), weights.end(),0);
+        while(left<right){
+            int mid=(left+right)/2;
+            int sum=0;
+            int d=1;
+            for(int w :weights){
+                if(w+sum>mid){
+                    d++;
+                    sum=0;
+                }
+                sum+=w;
+            }
+            if(d>days){
+                left=mid+1;
+            }
+            else right=mid;
+    
+        }
+        return left;
+    }
