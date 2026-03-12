@@ -1,0 +1,19 @@
+int findKthPositive(vector<int>& arr, int k) {
+        int n=arr.size();
+        int left=0;
+        int right=n-1;
+        int num=0;
+        while(left<=right){
+            int lost=0; //it finds no. missing so we come at position where we have k or more missing
+            int mid=left+(right-left)/2;
+            lost=arr[mid]-(mid+1); // it counts how many numbers should have been there with respect to their real position
+            if(lost<k){
+                left=mid+1;
+            }
+            else right=mid-1;
+            
+        }
+        return (left+k); //left stops when there r actually k missing before it so by adding kth we get wht shouldve already been there
+
+        
+    }
