@@ -1,0 +1,22 @@
+int splitArray(vector<int>& nums, int k) {
+        int n= nums.size();
+        int left =*max_element(nums.begin(),nums.end());
+        int right= accumulate(nums.begin(),nums.end(),0);
+        while(left<right){
+            int mid= left+ (right-left)/2;
+            int sum=0;
+            int count=1;
+            for(int n:nums){
+                sum+=n;
+                if(sum>mid){
+                    count++;
+                    sum=n;
+                }
+            }
+            if(count<=k) right=mid;
+            else if(count>k) left=mid+1; 
+
+        }
+        return left;
+        
+    }
