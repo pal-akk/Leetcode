@@ -1,0 +1,14 @@
+int maxDepth(string s) {
+        int depth =0; //its the time a parenthesis opens up means how deep it goes
+        int max= 0; //the max depth ever reached
+        for(char c: s){
+            if(c =='('){
+                depth++;
+                if(depth > max) max=depth;
+            }
+            else if(c==')') depth--;
+        }
+        return max;
+
+        
+    }
