@@ -1,0 +1,29 @@
+bool isPalindrome(ListNode* head) {
+        ListNode* slow=head;
+        ListNode* fast=head;
+        while(fast!=NULL && fast->next!=NULL){
+            slow=slow->next;
+            fast=fast->next->next;
+        }
+        ListNode* mid=slow;
+        ListNode* palin=reverseLL(mid);
+        ListNode* temp=head;
+        while(temp!=slow){
+            if(temp->val!=palin->val) return false;
+            temp=temp->next;
+            palin=palin->next;
+        }
+        return true;   
+    }
+    ListNode* reverseLL(ListNode* head){
+        ListNode* curr=head;
+        ListNode* next=head;
+        ListNode* prev=nullptr;
+        while(curr!=NULL){
+            next=curr->next;
+            curr->next=prev;
+            prev=curr;
+            curr=next;
+        }
+        return prev;
+    }
