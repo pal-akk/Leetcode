@@ -1,0 +1,15 @@
+bool checkSubarraySum(vector<int>& nums, int k) {
+        int n=nums.size();
+        unordered_map<int,int> remindex;
+        remindex[0]=-1;
+        int prefixsum=0;
+        for(int i=0;i<n;i++){
+            prefixsum+=nums[i];
+            int r = prefixsum%k;
+            if(remindex.count(r)){
+                if(i-remindex[r]>=2) return true;
+            }
+            else remindex[r]=i;
+        }
+        return false; 
+    }
