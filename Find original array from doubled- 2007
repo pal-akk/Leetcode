@@ -1,0 +1,18 @@
+vector<int> findOriginalArray(vector<int>& changed) {
+        int n = changed.size();
+        if(n%2 !=0) return {};
+        unordered_map<int,int> check;
+        sort(changed.begin(),changed.end());
+        for(int i=0;i<n;i++){
+            check[changed[i]]++;
+        }
+        vector<int> res;
+        for(int n : changed){
+            if(check[n]==0) continue;
+            if(check[2*n]==0) return {};
+            res.push_back(n);
+            check[n]--;
+            check[2*n]--;
+        }
+        return res;  
+    }
