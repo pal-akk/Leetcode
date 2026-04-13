@@ -1,0 +1,11 @@
+bool isPowerOfTwo(int n) {
+        if(n<=0) return false;
+        while(n){
+            if(n & (n-1) !=0) return false; // power of two always have one 1's 8=1000 & 7=0111 =0000
+            n=n/2;
+        }
+        return true;
+
+        
+    }
+};
