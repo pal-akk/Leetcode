@@ -1,0 +1,17 @@
+vector<vector<int>> subsets(vector<int>& nums) {
+        vector<vector<int>> res;
+        vector<int> s;
+        givsbset(0, nums, s, res);
+        return res;
+    }
+    void givsbset(int i , vector<int>& arr , vector<int>& r1 ,vector<vector<int>>& r){
+        if(i==arr.size()){
+            r.push_back(r1);
+            return;
+        }
+        givsbset(i+1,arr , r1 ,r);
+        r1.push_back(arr[i]);
+        givsbset(i+1 ,arr ,r1 ,r);
+        r1.pop_back();
+        
+    }
