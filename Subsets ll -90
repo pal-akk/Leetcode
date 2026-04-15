@@ -1,0 +1,18 @@
+vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        vector<vector<int>> res;
+        vector<int> s;
+        mksbset(0,nums,s,res);
+        return res;
+    }
+    void mksbset(int strt , vector<int>&arr ,vector<int>& r1 ,vector<vector<int>>&r){
+        r.push_back(r1);
+        for(int i=strt ;i<arr.size();i++){
+            if(i>strt && arr[i]==arr[i-1]) continue;
+            r1.push_back(arr[i]);
+            mksbset(i+1,arr,r1,r);
+            r1.pop_back();
+            
+        }
+          
+    }
