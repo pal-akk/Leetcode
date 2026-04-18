@@ -1,0 +1,21 @@
+vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        vector<vector<int>> tomb;
+        vector<int> res;
+        int n= candidates.size();
+        helper(0,target, candidates , res ,tomb);
+        return tomb;   
+    }
+    void helper(int i , int t , vector<int>& arr ,vector<int>& r, vector<vector<int>> &tomb){
+        if(i==arr.size()){
+            if(t==0){
+                tomb.push_back(r);
+            }
+            return;
+        }
+        if(arr[i]<=t){
+            r.push_back(arr[i]);
+            helper(i,t-arr[i],arr,r,tomb);
+            r.pop_back();
+        }
+        helper(i+1,t,arr,r,tomb);
+    }
