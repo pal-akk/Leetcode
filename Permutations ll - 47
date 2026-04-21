@@ -1,0 +1,23 @@
+vector<vector<int>> permuteUnique(vector<int>& nums) {
+        vector<vector<int>> tomb;
+        vector<int> res;
+        sort(nums.begin(),nums.end());
+        vector<bool> freq(nums.size(),false);
+        permut(nums,freq,res,tomb);
+        return tomb;
+    }
+    void permut(vector<int>& arr,vector<bool>& freq , vector<int>& r1, vector<vector<int>>& r){
+        if(r1.size()==arr.size()){
+            r.push_back(r1);
+            return;
+        }
+        for(int i =0 ;i<arr.size();i++){
+            if(freq[i]) continue;
+            if(i>0 && arr[i]==arr[i-1]&& !freq[i-1]) continue;
+            r1.push_back(arr[i]);
+            freq[i]=true;
+            permut(arr,freq,r1,r);
+            r1.pop_back();
+            freq[i]=false;
+        }
+    }
