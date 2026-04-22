@@ -1,0 +1,32 @@
+vector<vector<string>> solveNQueens(int n) {
+        vector<vector<string>> ans;
+        vector<string> board(n);
+        string s(n,'.');
+        for(int i=0 ;i<n ; i++){
+            board[i]=s;
+        }
+        vector<int> left(n , 0);
+        vector<int> updg(2*n - 1 , 0);
+        vector<int> ddg(2*n - 1 , 0);
+        place(0 , n ,board , left , updg , ddg , ans);
+        return ans;
+    }
+    void place(int c , int n , vector<string>& board , vector<int>& left , vector<int>& updg , vector<int>& ddg , vector<vector<string>>& ans){
+        if(c==n){
+            ans.push_back(board);
+            return;
+        }
+        for(int r=0 ;r<n ;r++){
+            if(left[r]==0 && updg[r+c]==0 && ddg[n-1 + (c-r)]==0){
+                board[r][c]='Q';
+                left[r]=1;
+                updg[r+c]=1;
+                ddg[n-1 +c -r]=1;
+                place(c+1 , n , board , left , updg , ddg , ans);
+                board[r][c]='.';
+                left[r]=0;
+                updg[r+c]=0;
+                ddg[n-1+c-r]=0;
+            }
+        }
+    }
