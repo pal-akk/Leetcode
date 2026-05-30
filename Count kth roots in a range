@@ -1,0 +1,12 @@
+int countKthRoots(int l, int r, int k) {
+        int count=0;
+        int strt=ceil(pow(l,1.0/k)-1e-9); //round of to >=
+        int end=floor(pow(r,1.0/k)+1e-9);//round off to <=
+        for(int i=strt ;i<=end ;i++){
+            long long val=1;
+            for(int j=0;j<k;j++) val*=i;
+            if(l<=val && val<=r) count++;
+        }
+        return count;
+        
+    }
