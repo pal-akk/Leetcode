@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int earliestFinishTime(vector<int>& landStartTime, vector<int>& landDuration, vector<int>& waterStartTime, vector<int>& waterDuration) {
+        int n = landStartTime.size();
+        int m = waterStartTime.size();
+        int landfinish=helper(landStartTime , landDuration ,waterStartTime ,waterDuration ,n ,m);
+        int waterfinish=helper(waterStartTime , waterDuration ,landStartTime ,landDuration ,m ,n);
+        return min(landfinish , waterfinish);
+    };
+    int helper(vector<int> &r1 ,vector<int> &d1 ,vector<int> &r2 ,vector<int> &d2 ,int s1 ,int s2){
+        int finish1=INT_MAX;
+        for(int i=0 ;i<s1 ;i++){
+            finish1=min(finish1 , r1[i]+d1[i]);
+        }
+        int finish2=INT_MAX;
+        for(int i=0 ;i<s2 ;i++){
+            finish2=min(max(finish1,r2[i]) + d2[i] , finish2);
+        }
+        return finish2;
+    }
+};
