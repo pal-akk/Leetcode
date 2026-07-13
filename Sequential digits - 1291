@@ -1,0 +1,29 @@
+class Solution {
+public:
+    vector<int> sequentialDigits(int low, int high) {
+        vector<int> res;
+        int l = countdigit(low);
+        int h = countdigit(high);
+        for(int len = l ; len<=h; len++){
+            for(int strt=1 ; strt <= 10-len ; strt++){
+                long long num=0;
+                for(int d = strt ; d < strt+len ; d++){
+                    num=num*10+d;
+                }
+                if(num>=low && num<=high){
+                    res.push_back(num);
+                }
+            }
+        }
+        return res;  
+    }
+
+    int countdigit(int x){
+        int count=0;
+        while(x){
+            count++;
+            x/=10;
+        }
+        return count;
+    }
+};
