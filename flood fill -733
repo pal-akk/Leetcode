@@ -1,0 +1,26 @@
+class Solution {
+public:
+    void dfs(int sr, int sc , vector<vector<int>> &mtx , int color, int icolor){
+        int n=mtx.size();
+        int m=mtx[0].size();
+        int dlr[]={-1,1,0,0};
+        int dlc[]={0,0,1,-1};
+        for(int i=0 ; i<4 ; i++){
+            int r=sr+dlr[i];
+            int c=sc+dlc[i];
+            if(r>=0 && r<n && c>=0 && c<m && mtx[r][c]==icolor && mtx[r][c]!=color){
+                mtx[r][c]=color;
+                dfs(r,c,mtx,color,icolor);
+            }
+        }
+    }
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color) {
+        vector<vector<int>> mtx = image;
+        int icolor=image[sr][sc];
+        mtx[sr][sc]=color;
+        dfs(sr,sc,mtx,color,icolor);
+        return mtx;
+
+        
+    }
+};
