@@ -1,0 +1,35 @@
+class Solution {
+public:
+    vector<int> countWordOccurrences(vector<string>& chunks, vector<string>& queries) {
+        int n= chunks.size();
+        int m= queries.size();
+        string s="";
+        for(int i =0 ; i<n ; i++){
+            s+=chunks[i];
+        }  
+        unordered_map<string , int> count;
+        int l=0;
+        string st;
+        while(l<s.size()){
+            if(s[l]>='a' && s[l]<='z'){
+                st+=s[l];
+            }
+            else if(s[l]=='-' && l>0 && l+1<s.size() &&
+            s[l-1]>='a' && s[l-1]<='z' && s[l+1]>='a' && s[l+1]<='z'){
+                st+='-';
+            }
+            else{
+                count[st]++;
+                st="";
+            }
+            l++;
+        }
+        count[st]++;
+        vector<int> ans;
+        for(int i=0 ; i<m ; i++){
+            ans.push_back(count[queries[i]]);
+
+        }    
+        return ans;  
+    }
+};
