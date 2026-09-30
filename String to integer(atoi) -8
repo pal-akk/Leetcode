@@ -20,3 +20,36 @@ int myAtoi(string s) {
         }
         return sign*result;
     }
+
+....
+class Solution {
+public:
+    int myAtoi(string s) {
+        int st=0;
+        int n=s.size();
+        int i=0;
+        while(i<n && s[i]==' '){
+            i++;
+        }
+        int sign=1;
+        if(i<n && s[i]=='-'){
+            sign=-1;
+            i++;
+        }
+        else if(i<n && s[i]=='+'){
+            i++;
+        }
+        int digit=0;
+        while(i<n && s[i]>='0' && s[i]<='9'){
+            digit=s[i]-'0';
+            if(st>INT_MAX/10 || (st==INT_MAX/10 && digit>7)){
+                return sign==1?INT_MAX:INT_MIN;
+            }
+            st=st*10+digit;
+            i++;
+        }
+        return st*sign;
+
+        
+    }
+};
