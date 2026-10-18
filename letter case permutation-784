@@ -1,0 +1,28 @@
+class Solution {
+public:
+    void sp(int i , string s , vector<string>&res){
+        if(i==s.size()){
+            res.push_back(s);
+            return;
+        }
+        if(isalpha(s[i])){
+            char orig=s[i];
+            s[i]=tolower(orig);
+            sp(i+1,s,res);
+            s[i]=toupper(orig);
+            sp(i+1,s,res);
+            s[i]=orig;
+        }
+        else{
+            sp(i+1,s,res);
+        }
+
+    }
+    vector<string> letterCasePermutation(string s) {
+        vector<string> res;
+        sp(0,s,res);
+        return res;
+
+        
+    }
+};
