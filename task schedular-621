@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int leastInterval(vector<char>& tasks, int n) {
+        vector<int> frq(26,0);
+        for(char c : tasks){
+            frq[c-'A']++;
+        }
+        int mx=0;
+        for(int t : frq){
+            mx=max(mx,t);
+        }
+        int cnt=0;
+        for(int t:frq){
+            if(t==mx) cnt++;
+        }
+        int ad = (mx-1)*(n+1)+cnt;
+        int f=tasks.size();
+        return max(f,ad);
+
+        
+    }
+};
