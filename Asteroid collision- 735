@@ -1,0 +1,35 @@
+class Solution {
+public:
+    vector<int> asteroidCollision(vector<int>& asteroids) {
+        stack<int> st;
+        bool alive=true;      // asteroid incoming not destroyed
+        for(int n:asteroids){
+            while(!st.empty() && st.top()>0 && n<0){
+                if(st.top()<-n){     
+                    st.pop();
+                }
+                else if(st.top()==-n){ // if incoming asteroid is -ve then only collision
+                    st.pop();          //st has frst element -ve the incoming +ve will go away of it
+                    alive=false;       // nd -ve will go in same dirxn no collision
+                    break;
+                }
+                else{
+                    alive=false;
+                    break;
+                }
+            }
+            if(alive){
+                st.push(n);
+            }
+            alive=true;
+        }
+        vector<int> s;
+        while(!st.empty()){
+            s.push_back(st.top());
+            st.pop();
+        }
+        reverse(s.begin(),s.end());
+        return s;
+        
+    }
+};
