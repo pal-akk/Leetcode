@@ -1,0 +1,61 @@
+class Solution {
+public:
+    unordered_map<string,int> mp;
+    vector<vector<string>> ans;
+    void dfs(string word , vector<string> &ar , string beginWord){
+        if(word==beginWord){
+            reverse(ar.begin(),ar.end());
+            ans.push_back(ar);
+            reverse(ar.begin(),ar.end());
+            return;
+        }
+        string w= word;
+        for(int i=0 ; i<w.size(); i++){
+            char og = w[i];
+            for(char c='a' ; c<='z' ; c++){
+                w[i]=c;
+                if(mp.find(w)!=mp.end() && mp[w]+1==mp[word]){
+                    ar.push_back(w);
+                    dfs(w,ar,beginWord);
+                    ar.pop_back();
+                }
+                w[i]=og;
+            }
+        }
+    }
+    vector<vector<string>> findLadders(string beginWord, string endWord, vector<string>& wordList) {
+        mp.clear();
+        ans.clear();
+        unordered_set<string> st(wordList.begin(),wordList.end());
+        if(st.find(endWord)==st.end()) return {};
+        int n=wordList.size();
+        queue<string> q;
+        q.push(beginWord);
+        mp[beginWord]=1;
+        st.erase(beginWord);
+        while(!q.empty()){
+            string word = q.front();
+            q.pop();
+            int level=mp[word];
+            for(int i=0 ; i<word.size(); i++){
+                char og = word[i];
+                for(char j='a' ; j<='z' ; j++){
+                    word[i]=j;
+                    if(st.find(word)!=st.end()){
+                        q.push(word);
+                        mp[word]=level+1;
+                        st.erase(word);
+                    }
+                    word[i]=og;
+                }
+            }
+        }
+        vector<string> ar;
+        ar.push_back(endWord);
+        if(mp.find(endWord)!=mp.end()){
+            dfs(endWord,ar,beginWord);
+        }
+        return ans;
+        
+    }
+};
